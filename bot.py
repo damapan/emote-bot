@@ -104,7 +104,7 @@ class MyClient(discord.Client):
         print('Message from {0.author}: {0.content}'.format(message))
         print(message.guild)
 
-        if message.content == "quit" and message.guild.id == privateGuildID: exit()
+        if message.content == "quit": exit()
 
     
     async def on_interaction(self,interaction: discord.Interaction):
@@ -155,12 +155,15 @@ class MyClient(discord.Client):
         emoteUrl = emote['images']['url_4x']
         emoteName = emote['name']
         saveImage(emoteUrl,"confirmEmote.png")
-        f = discord.File(open("confirmEmote.png", "rb"))
-        os.remove("confirmEmote.png")
 
+        emoteConfirm = open("confirmEmote.png", "rb")
+        f = discord.File(emoteConfirm)
+        emoteConfirm.close()
+        f.close()
         #sent a conformiation message with the emote
         v = EmoteConfim(emoteName,emoteUrl)
         await interaction.response.send_message (f'The closest emote I could find was \"{emoteName}\", should I add it?', file=f, view= v, ephemeral=True)
+        os.remove("confirmEmote.png")
 
 
     async def addTwitchEmote(self, interaction:discord.Interaction, emoteName, emoteUrl):
