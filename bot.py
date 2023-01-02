@@ -10,6 +10,11 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.emojis = True
 
+privateGuildID = open("Constants/privateGuildID.txt", "r").read()
+botToken = open("Constants/token.txt","r").read()
+botRequestHeader = {
+                "Authorization": "Bot {0}".format(botToken)
+            }
 
 class TwitchChannelSelect(discord.ui.View):
 
@@ -27,14 +32,11 @@ class TwitchChannelSelect(discord.ui.View):
 
             #gets the channel thumbnail
             saveImage(potentialChannels[i]['thumbnail_url'], f"{i}.png")
-            emoteID = json.loads(client.postEmote(f'Thumbnail{i}',f"{i}.png",940333713764519967).text)['id']
+            emoteID = json.loads(client.postEmote(f'Thumbnail{i}',f"{i}.png",privateGuildID).text)['id']
             os.remove(f"{i}.png")
 
             #posts thumbnail as emote to a private server
-            headers = {
-                "Authorization": "Bot {0}".format(open("constants/token.txt").read())
-            }
-            emote = requests.get("https://discord.com/api/v10/guilds/{0}/emojis/{1}".format("940333713764519967", emoteID), headers=headers)
+            emote = requests.get("https://discord.com/api/v10/guilds/{0}/emojis/{1}".format(privateGuildID, emoteID), headers=botRequestHeader)
             emote = json.loads(emote.text)
             self.emoteIDs.append(emote['id'])
 
@@ -49,11 +51,8 @@ class TwitchChannelSelect(discord.ui.View):
         '''
         delete all emotes created for the select box
         '''
-        headers = {
-                "Authorization": "Bot {0}".format(open("Constants/token.txt").read())
-            }
         for id in self.emoteIDs:
-            requests.delete("https://discord.com/api/v10/guilds/{0}/emojis/{1}".format("940333713764519967", id), headers=headers)
+            requests.delete("https://discord.com/api/v10/guilds/{0}/emojis/{1}".format(privateGuildID, id), headers=botRequestHeader)
 
     async def selectCallback(self, interaction: discord.Interaction):
         #stop view from recieving interactions
@@ -175,9 +174,7 @@ class MyClient(discord.Client):
         os.remove("{0}.png".format(emoteName))
     
     def postEmote(self,emoteName, filePath, guildID):
-        headers = {
-            "Authorization": "Bot {0}".format(open("Constants/token.txt").read())
-        }
+
 
         with open(filePath, "rb") as e: 
             import base64
@@ -190,10 +187,10 @@ class MyClient(discord.Client):
             newEmote = {
                 'name': emoteName,
                 'image': dataurl}
-            response = requests.post("https://discord.com/api/v10/guilds/{0}/emojis".format(guildID), headers=headers,json=newEmote)     
+            response = requests.post("https://discord.com/api/v10/guilds/{0}/emojis".format(guildID), headers=botRequestHeader,json=newEmote)     
         return response       
 
 
 
 client = MyClient(intents=intents)
-client.run(open("Constants/token.txt","r").read())
+client.run(botToken)
