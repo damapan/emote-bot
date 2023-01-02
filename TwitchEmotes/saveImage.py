@@ -17,10 +17,7 @@ def saveImage(imageURL: str  , fileName: str) -> None:
     #make file
     with open(fileName, "wb") as image:
         #write image to file 
-        for block in response.iter_content(1):
-            if not block:
-                break
-            image.write(block)
+        image.write(response.content)
 
 
 
