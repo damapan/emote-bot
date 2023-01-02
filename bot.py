@@ -104,7 +104,7 @@ class MyClient(discord.Client):
         print('Message from {0.author}: {0.content}'.format(message))
         print(message.guild)
 
-        if message.content == "quit": exit()
+        if message.content == "quit" and message.guild.id == privateGuildID: exit()
 
     
     async def on_interaction(self,interaction: discord.Interaction):
@@ -173,7 +173,7 @@ class MyClient(discord.Client):
             await interaction.response.send_message("Sorry, something went wrong",ephemeral= True)
         os.remove("{0}.png".format(emoteName))
     
-    def postEmote(self,emoteName, filePath, guildID):
+    def postEmote(self,emoteName, filePath:str, guildID):
 
 
         with open(filePath, "rb") as e: 
