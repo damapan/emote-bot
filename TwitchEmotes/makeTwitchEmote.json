@@ -1,0 +1,40 @@
+{
+    "name": "addtwitchemote",
+    "description": "adds emote from twitch",
+    "options": [
+        {
+            "name": "fromchannel",
+            "description": "Adds an emote from a particular twitch channel",
+            "type": 1,
+            "options": [
+                {
+                    "name": "channel",
+                    "description": "The channel that has the emote you are looking for",
+                    "type": 3,
+                    "required": true
+                },
+                {
+                    "name": "emote",
+                    "description": "The name of the emote you would like to add",
+                    "type": 3,
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "global",
+            "description": "Adds a global twitch emote",
+            "type": 1,
+            "options": [
+                {
+                    "name": "emote",
+                    "description": "The name of the emote you would like to add",
+                    "type": 3,
+                    "required": true
+                }
+            ]
+        }        
+
+
+    ]
+}
