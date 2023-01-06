@@ -62,18 +62,18 @@ class TwitchChannelSelect(discord.ui.View):
         channelID = interaction.data['values'][0]
         await client.confirmTwitchEmote(interaction, emoteName=self.emoteName, channelID=channelID)
 
-class EmoteConfim(discord.ui.View):
-    '''Create a discord view to confim adding an emote to a server'''
+class EmoteConfirm(discord.ui.View):
+    '''Create a discord view to confirm adding an emote to a server'''
 
     async def confirmCallback(self, interaction: discord.Interaction):
-        #stops the view from recieiving interactions
+        #stops the view from receiving interactions
         self.stop()
 
         #adds Emote to server
         await client.addTwitchEmote(interaction, self.emoteName, self.emoteUrl)
 
     async def rejectCallback(self, interaction: discord.Interaction):
-        #stops the view from recieiving interactions
+        #stops the view from receiving interactions
         self.stop()
 
         #Closing message
@@ -84,15 +84,15 @@ class EmoteConfim(discord.ui.View):
         self.emoteUrl = emoteUrl
         super().__init__()
 
-        #create a button to confim adding emote
-        confimButton = discord.ui.Button(label="Go ahead", style= discord.ButtonStyle.green)
-        confimButton.callback = self.confirmCallback
+        #create a button to confirm adding emote
+        confirmButton = discord.ui.Button(label="Go ahead", style= discord.ButtonStyle.green)
+        confirmButton.callback = self.confirmCallback
 
         #create a button to reject adding emote
         rejectButton = discord.ui.Button(label="No thanks", style= discord.ButtonStyle.red)
         rejectButton.callback = self.rejectCallback
 
-        self.add_item(confimButton)
+        self.add_item(confirmButton)
         self.add_item(rejectButton)
 
 
@@ -130,7 +130,7 @@ class MyClient(discord.Client):
 
             
     async def confirmTwitchChannel(self,interaction: discord.Interaction, emoteName, channelName):
-        '''Creates a message for the user to confim their channel selection'''
+        '''Creates a message for the user to confirm their channel selection'''
 
         message = "Which channel would you like to get the emote from?\n"      
         v = TwitchChannelSelect(channelName, emoteName=emoteName)
@@ -161,7 +161,7 @@ class MyClient(discord.Client):
         emoteConfirm.close()
         f.close()
         #sent a conformiation message with the emote
-        v = EmoteConfim(emoteName,emoteUrl)
+        v = EmoteConfirm(emoteName,emoteUrl)
         await interaction.response.send_message (f'The closest emote I could find was \"{emoteName}\", should I add it?', file=f, view= v, ephemeral=True)
         os.remove("confirmEmote.png")
 
