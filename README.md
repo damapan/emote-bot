@@ -21,6 +21,7 @@ https://discord.com/developers/docs/interactions/application-commands#create-glo
 ________________________________________________________________________________________________________________________________________________________
 
 How to use the bot:
+
 once all the files have been set up and the command has been uploaded, the bot can be added to a server using the link below
 https://discord.com/api/oauth2/authorize?client_id={application id goes here}&permissions=1610992704&scope=bot%20applications.commands
 
