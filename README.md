@@ -27,10 +27,13 @@ https://discord.com/api/oauth2/authorize?client_id={application id goes here}&pe
 The server will now have 2 slash commands added to it
 "/addtwitchemote fromchannel"
 This command needs a channel name and an emote name, and once excecuted the bot will find 3 possible channels the user can select from.
+
 ![alt text](https://github.com/damapan/emote-bot/blob/main/README%20images/channel%20select.png?raw=true)
 
 Once the user has selected a channel it will try to find an emote matching the name provided and get the user to confirm adding it to the server.
+
 ![alt text](https://github.com/damapan/emote-bot/blob/main/README%20images/channel%20emote%20confirm.png?raw=true)
+
 
 "/addtwitchemote global"
 This command needs an emote name, and once excecuted the bot will try to find a global twitch emote matching the name provided
