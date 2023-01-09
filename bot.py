@@ -168,6 +168,7 @@ class MyClient(discord.Client):
 
 
     async def addTwitchEmote(self, interaction:discord.Interaction, emoteName, emoteUrl):
+        '''Adds the twitch emote to the server'''
         saveImage(emoteUrl, "{0}.png".format(emoteName))
 
         response = self.postEmote(emoteName, f"{emoteName}.png", interaction.guild_id)
@@ -178,7 +179,7 @@ class MyClient(discord.Client):
         os.remove("{0}.png".format(emoteName))
     
     def postEmote(self,emoteName, filePath:str, guildID):
-
+        '''Post an emote to the guild with the provided ID'''
 
         with open(filePath, "rb") as e: 
             import base64
@@ -195,6 +196,6 @@ class MyClient(discord.Client):
         return response       
 
 
-
+#running the bot
 client = MyClient(intents=intents)
 client.run(botToken)
