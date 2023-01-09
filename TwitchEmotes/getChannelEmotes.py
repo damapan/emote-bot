@@ -1,15 +1,18 @@
 import requests
 import json
 
-with open("Constants/damapanAccess", "r") as access:
+with open("Constants/twitchOAuth.txt", "r") as access:
     oAuth = access.read() 
+
+with open("Constants/twitchClientID.txt", "r") as access:
+    clientID = access.read() 
 
 def getChannelID(channelName: str) -> int:
     response = requests.get(
                     url = "https://api.twitch.tv/helix/search/channels",
                     headers={
                         'Authorization': 'Bearer ' + oAuth,
-                        'Client-Id': '91ifbbzxryquublnutz8nsax68so5m',
+                        'Client-Id': clientID,
                     },
                     params={
                         'query': channelName
@@ -26,7 +29,7 @@ def getEmoteSet(channelID: int) -> dict:
                     url = url ,
                     headers={
                         'Authorization': 'Bearer ' + oAuth,
-                        'Client-Id': '91ifbbzxryquublnutz8nsax68so5m',
+                        'Client-Id': clientID,
                     })
     return json.loads(response.text)
 
@@ -36,7 +39,7 @@ def getChannelSet(channelName:str, rangeLength: int=3):
                 url = "https://api.twitch.tv/helix/search/channels",
                 headers={
                     'Authorization': 'Bearer ' + oAuth,
-                    'Client-Id': '91ifbbzxryquublnutz8nsax68so5m',
+                    'Client-Id': clientID,
                 },
                 params={
                     'query': channelName
@@ -49,7 +52,7 @@ def getChannelSet(channelName:str, rangeLength: int=3):
     return channels
 
 
-
+#test script
 if __name__ == '__main__':
     print(getEmoteSet(36177185))
     print(getChannelSet("itronmouse"))

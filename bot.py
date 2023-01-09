@@ -11,7 +11,7 @@ intents.message_content = True
 intents.emojis = True
 
 privateGuildID = open("Constants/privateGuildID.txt", "r").read()
-botToken = open("Constants/token.txt","r").read()
+botToken = open("Constants/botToken.txt","r").read()
 botRequestHeader = {
                 "Authorization": "Bot {0}".format(botToken)
             }
