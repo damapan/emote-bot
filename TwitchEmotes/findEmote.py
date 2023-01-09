@@ -15,7 +15,7 @@ def findEmote (emoteSet: dict, emoteName: str) -> dict:
             return(data[emote])
 
     #find closest match and callback
-    closestMatch = difflib.get_close_matches(emoteName,possibleEmotes,1)
+    closestMatch = difflib.get_close_matches(emoteName,possibleEmotes,1,0.3)
     if len(closestMatch) == 0: return None
     return findEmote(emoteSet,closestMatch[0])
     
