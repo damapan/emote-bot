@@ -104,7 +104,8 @@ class MyClient(discord.Client):
         print('Message from {0.author}: {0.content}'.format(message))
         print(message.guild)
 
-        if message.content == "quit": exit()
+        #uncomment this when testing the bot
+        #if message.content == "quit": exit()
 
     
     async def on_interaction(self,interaction: discord.Interaction):
