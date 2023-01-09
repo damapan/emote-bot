@@ -2,7 +2,7 @@ BEFORE RUNNING THE BOT:
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 The bot requires a folder named 'Constants' with 4 files in it to run
 
-1. A twitch application id, to create a twitch application visit https://dev.twitch.tv/
+1. A twitch application id, stored in a file name twitchClientID.txt, to create a twitch application visit https://dev.twitch.tv/
 
 2. A twtich user access token stored in a file name 'twitchOAuth.txt'
 info on obtaining a user access token can be found on twitch's api documentation
