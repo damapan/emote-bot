@@ -132,10 +132,11 @@ class MyClient(discord.Client):
             
     async def confirmTwitchChannel(self,interaction: discord.Interaction, emoteName, channelName):
         '''Creates a message for the user to confirm their channel selection'''
-
+        await interaction.response.defer(ephemeral=True)
         message = "Which channel would you like to get the emote from?\n"      
         v = TwitchChannelSelect(channelName, emoteName=emoteName)
-        await interaction.response.send_message (message, view= v, ephemeral=True)    
+        await interaction.followup.send (message, view= v, ephemeral=True)   
+         
 
         #deletes emotes created by the view for the selection
         v.deleteEmotes()
